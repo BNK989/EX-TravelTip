@@ -51,20 +51,23 @@ dialog {
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr; */
+}
+
+dialog > button {
+  width: 2em;
+  place-self: center end;
+}
+
+dialog form {
+  grid-column: 1 /-1;
+  place-self: center;
+}
+
+.open-dialog {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-
 }
-
-dialog > button{
-    width: 2em;
-    place-self: center end;
-    
-  }
-
-dialog form{
-    grid-column: 1 /-1;
-    place-self: center;
-}
-

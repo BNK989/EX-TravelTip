@@ -66,16 +66,13 @@ function renderLocs(locs) {
                 }
             </p>
             <div class="loc-btns">     
-               <button title="Delete" onclick="app.onRemoveLoc('${
-                 loc.id
-               }')">🗑️</button>
-               <button title="Edit" onclick="app.onUpdateLoc('${
-                 loc.id
-               }')">✏️</button>
-               <button title="Select" onclick="app.onSelectLoc('${
-                 loc.id
-               }')">🗺️</button>
-            </div>     
+               <button title="Delete" onclick="app.onRemoveLoc('${loc.id
+                }')">🗑️</button>
+               <button title="Edit" onclick="app.onUpdateLoc('${loc.id
+                }')">✏️</button>
+               <button title="Select" onclick="app.onSelectLoc('${loc.id
+                }')">🗺️</button>
+            </div>
         </li>`
     })
     .join('')
@@ -149,7 +146,7 @@ function onSearchAddress(ev) {
 var gGeo
 function onAddLoc(geo) {
   const dialog = document.querySelector('dialog')
-  dialog.open = true
+  dialog.classList.add('open-dialog')
   gGeo = geo
   //const loc = addUpdateLocation(geo)
 
@@ -168,8 +165,6 @@ function addUpdateLocation(ev) {
     rate: +locRating,
     geo: gGeo,
   }
-  console.log('gGeo:', gGeo)
-  console.log('loc:', loc)
 
   locService
     .save(loc)
@@ -182,12 +177,12 @@ function addUpdateLocation(ev) {
       console.error('OOPs:', err)
       flashMsg('Cannot add location')
     })
-    .finally(() => (dialog.open = false))
+    .finally(() => (dialog.classList.remove('open-dialog')))
   //eturn loc
 }
 
 function closeDialog() {
-  document.querySelector('dialog').open = false
+  document.querySelector('dialog').classList.remove('open-dialog')
 }
 
 function loadAndRenderLocs() {
