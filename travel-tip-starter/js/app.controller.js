@@ -47,8 +47,7 @@ function renderLocs(locs) {
         lng: loc.geo.lng,
       }
       if (gUserPos) distance = utilService.getDistance(gUserPos, latLng)
-      console.log('gUserPos', gUserPos)
-      console.log('loc.latLng', loc.latLng)
+
       return `
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
@@ -94,26 +93,28 @@ function renderLocs(locs) {
 function onRemoveLoc(locId) {
   //const isConfirm = confirm('Sure you want to delete?')
 
-  new Promise( Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this location!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-        Swal.fire({
-            title: "Deleted!",
-            text: "Location has been deleted.",
-            icon: "success"
-        })
-        return result.isConfirmed
-        }
+  new Promise(
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this location!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     })
-    .then((isConfirmed)=>{
-        if(!isConfirmed) return
+      .then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Location has been deleted.',
+            icon: 'success',
+          })
+          return result.isConfirmed
+        }
+      })
+      .then((isConfirmed) => {
+        if (!isConfirmed) return
         locService
           .remove(locId)
           .then(() => {
@@ -125,8 +126,7 @@ function onRemoveLoc(locId) {
             console.error('OOPs:', err)
             flashMsg('Cannot remove location')
           })
-
-    })
+      })
   )
 }
 
@@ -228,11 +228,18 @@ function displayLoc(loc) {
   mapService.panTo(loc.geo)
   mapService.setMarker(loc)
 
+  var distance = ''
+  const latLng = {
+    lat: loc.geo.lat,
+    lng: loc.geo.lng,
+  }
+  if (gUserPos) distance = utilService.getDistance(gUserPos, latLng)
+
   const el = document.querySelector('.selected-loc')
   el.querySelector('.loc-name').innerText = loc.name
   el.querySelector('.loc-address').innerText = loc.geo.address
   el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
-  el.querySelector('.loc-distance').innerText = ''
+  el.querySelector('.loc-distance').innerText = `${distance ? 'Distance: ' + distance + 'km' : ''}`
   el.querySelector('[name=loc-copier]').value = window.location
   el.classList.add('show')
 
