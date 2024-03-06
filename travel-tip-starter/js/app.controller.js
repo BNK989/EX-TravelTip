@@ -69,7 +69,7 @@ function renderLocs(locs) {
                 }')">✏️</button>
                <button title="Select" onclick="app.onSelectLoc('${loc.id
                 }')">🗺️</button>
-            </div>     
+            </div>
         </li>`
         })
         .join('')
