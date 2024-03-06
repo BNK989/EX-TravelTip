@@ -92,19 +92,42 @@ function renderLocs(locs) {
 }
 
 function onRemoveLoc(locId) {
-  const isConfirm = confirm('Sure you want to delete?')
-  if (!isConfirm) return
-  locService
-    .remove(locId)
-    .then(() => {
-      flashMsg('Location removed')
-      unDisplayLoc()
-      loadAndRenderLocs()
+  //const isConfirm = confirm('Sure you want to delete?')
+
+  const isConfirm = new Promise( Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this location!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+        Swal.fire({
+            title: "Deleted!",
+            text: "Location has been deleted.",
+            icon: "success"
+        })
+        return result.isConfirmed
+        }
     })
-    .catch((err) => {
-      console.error('OOPs:', err)
-      flashMsg('Cannot remove location')
+    .then((isConfirmed)=>{
+        if(!isConfirmed) return
+        locService
+          .remove(locId)
+          .then(() => {
+            flashMsg('Location removed')
+            unDisplayLoc()
+            loadAndRenderLocs()
+          })
+          .catch((err) => {
+            console.error('OOPs:', err)
+            flashMsg('Cannot remove location')
+          })
+
     })
+  )
 }
 
 function onSearchAddress(ev) {
