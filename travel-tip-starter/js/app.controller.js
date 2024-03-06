@@ -94,7 +94,7 @@ function renderLocs(locs) {
 function onRemoveLoc(locId) {
   //const isConfirm = confirm('Sure you want to delete?')
 
-  const isConfirm = new Promise( Swal.fire({
+  new Promise( Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this location!",
         icon: "warning",
@@ -232,6 +232,7 @@ function displayLoc(loc) {
   el.querySelector('.loc-name').innerText = loc.name
   el.querySelector('.loc-address').innerText = loc.geo.address
   el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
+  el.querySelector('.loc-distance').innerText = ''
   el.querySelector('[name=loc-copier]').value = window.location
   el.classList.add('show')
 
