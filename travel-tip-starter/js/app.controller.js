@@ -66,16 +66,13 @@ function renderLocs(locs) {
                 }
             </p>
             <div class="loc-btns">     
-               <button title="Delete" onclick="app.onRemoveLoc('${
-                 loc.id
-               }')">🗑️</button>
-               <button title="Edit" onclick="app.onUpdateLoc('${
-                 loc.id
-               }')">✏️</button>
-               <button title="Select" onclick="app.onSelectLoc('${
-                 loc.id
-               }')">🗺️</button>
-            </div>     
+               <button title="Delete" onclick="app.onRemoveLoc('${loc.id
+                }')">🗑️</button>
+               <button title="Edit" onclick="app.onUpdateLoc('${loc.id
+                }')">✏️</button>
+               <button title="Select" onclick="app.onSelectLoc('${loc.id
+                }')">🗺️</button>
+            </div>
         </li>`
     })
     .join('')
