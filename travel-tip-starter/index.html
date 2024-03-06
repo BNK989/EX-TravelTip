@@ -20,6 +20,7 @@
       </form>
     </dialog>
     <header>
+<<<<<<< HEAD
       <h1>TravelTip</h1>
       <section class="selected-loc">
         <h2>
@@ -44,6 +45,23 @@
           &nbsp;
         </button>
       </form>
+=======
+        <h1>TravelTip</h1>
+        <section class="selected-loc">
+            <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
+            <span class="loc-distance"></span>
+            <h4 class="loc-address"></h4>
+            <button onclick="app.onCopyLoc()">Copy location</button>
+            <button onclick="app.onShareLoc()">Share location</button>
+            <input name="loc-copier" />
+        </section>
+        <form class="form-search" onsubmit="app.onSearchAddress(event)">
+            <input type="text" name="address" placeholder="Search address" />
+            <button title="Search">🔍</button>
+            <button type="button" title="My Position" onclick="app.onPanToUserPos()" class="btn-user-pos">&nbsp;
+            </button>
+        </form>
+>>>>>>> 389e3135a42d8a082a767fb32e0f519d6fe758e9
     </header>
     <main>
       <div class="map"></div>
